@@ -1,4 +1,5 @@
 class HomesController < ApplicationController
-  def index
+  def home
+    render json: { status: "It's alive" }
   end
 end
