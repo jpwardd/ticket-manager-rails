@@ -4,16 +4,17 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Login from './pages/auth/Login';
 
 
-
-function App() {
+const App: React.FC = (props) => {
   return (
     <div className="App">
+
       <Router>
         <Route exact path="/" component={Login} />
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
+ 
     </div>
   );
 }
