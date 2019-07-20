@@ -1,24 +1,18 @@
-import React, { Component } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import React, { useState } from 'react'
 import axios from 'axios'
+import { RouteComponentProps } from 'react-router-dom'
 
-export class Login extends Component<ILoginProps, ILoginState> {
-  constructor(props: ILoginProps) {
-    super(props)
-    this.state = {
-      email: '',
-      password: ''
-    }
-  }
+type formElement = React.FormEvent<HTMLFormElement>
+type inputElement = React.ChangeEvent<HTMLInputElement>
 
-  handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ email: e.target.value })
-  }
-  handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ password: e.target.value })
-  }
-  onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const { email, password } = this.state;
+export const Login: React.FC<ILoginProps> = (props) => {
+  const [loginFormData, setLoginFormData ] = useState<ILoginState>({
+    email: '',
+    password: ''
+  })
+
+ const onSubmit = (e: formElement) => {
+    const { email, password } = loginFormData;
     axios.post("http://localhost:3001/sessions",
     {
       user: {
@@ -32,7 +26,7 @@ export class Login extends Component<ILoginProps, ILoginState> {
       console.log(response.data)
 
       if (response.data.logged_in) {
-        this.props.history.push('/dashboard')
+        props.history.push('/dashboard')
       }
     })
     .catch(err => {
@@ -41,20 +35,26 @@ export class Login extends Component<ILoginProps, ILoginState> {
     e.preventDefault();
   }
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <input onChange={this.handleEmailChange} type="email" name="email" value={this.state.email} id="" />
-          <input onChange={this.handlePasswordChange} type="password" name="password" value={this.state.password} />
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    )
+  const handleEmailChange = (e: inputElement) => {
+    setLoginFormData({ ...loginFormData, email: e.target.value })
   }
+  const handlePasswordChange = (e: inputElement) => {
+    setLoginFormData({ ...loginFormData, password: e.target.value })
+  }
+  const { email, password } = loginFormData;
+   return(
+
+     <div>
+      <form onSubmit={onSubmit}>
+        <input onChange={handleEmailChange} type="email" name="email" value={email} id="" />
+        <input onChange={handlePasswordChange} type="password" name="password" value={password} />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  )
 }
 
-interface ILoginProps extends RouteComponentProps<{ history: string}> {
+interface ILoginProps extends RouteComponentProps<{ history: string }> {
 
 }
 
@@ -62,4 +62,5 @@ interface ILoginState {
   email: string;
   password: string;
 }
+
 export default Login
