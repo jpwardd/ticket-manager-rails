@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { RouteComponentProps } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loginUser } from '../../actions/AuthActions'
+import { IAppState } from '../../store/store';
 
 type formElement = React.FormEvent<HTMLFormElement>
 type inputElement = React.ChangeEvent<HTMLInputElement>
@@ -10,28 +12,12 @@ export const Login: React.FC<ILoginProps> = (props) => {
     email: '',
     password: ''
   })
-
- const onSubmit = (e: formElement) => {
+  const { email, password } = loginFormData;
+  
+  const onSubmit = (e: formElement) => {
     const { email, password } = loginFormData;
-    axios.post("http://localhost:3001/sessions",
-    {
-      user: {
-        email: email,
-        password: password
-      }
-    },
-    { withCredentials: true }
-    )
-    .then(response => {
-      console.log(response.data)
-
-      if (response.data.logged_in) {
-        props.history.push('/dashboard')
-      }
-    })
-    .catch(err => {
-      console.log("login error", err);
-    });
+    props.loginUser(email, password)
+    props.history.push('/dashboard')
     e.preventDefault();
   }
 
@@ -41,7 +27,6 @@ export const Login: React.FC<ILoginProps> = (props) => {
   const handlePasswordChange = (e: inputElement) => {
     setLoginFormData({ ...loginFormData, password: e.target.value })
   }
-  const { email, password } = loginFormData;
    return(
 
      <div>
@@ -55,7 +40,7 @@ export const Login: React.FC<ILoginProps> = (props) => {
 }
 
 interface ILoginProps extends RouteComponentProps<{ history: string }> {
-
+  loginUser: (email: string, password: string) => void
 }
 
 interface ILoginState {
@@ -63,4 +48,5 @@ interface ILoginState {
   password: string;
 }
 
-export default Login
+
+export default connect<IAppState>(null, { loginUser })(Login)
