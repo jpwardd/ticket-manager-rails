@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import configureStore, { IAppState } from "./store/store";
+import { IAppState, store } from "./store/store";
 import { Store } from "redux";
 
-const store = configureStore();
+
 
 
 interface IProps {
