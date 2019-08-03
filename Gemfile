@@ -54,3 +54,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 gem 'rack-cors', '~> 1.0', '>= 1.0.3'
+gem 'pry', '~> 0.12.2'
+gem 'pry-rails', '~> 0.3.9'

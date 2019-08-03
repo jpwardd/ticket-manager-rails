@@ -1,6 +1,6 @@
-class RegistrationsController < ApplicationController
-  def create
-    binding.pry
+class Api::V1::RegistrationsController < ApplicationController
+  include CurrentUserConcern
+ def create
     user = User.create!(
       first_name: params['user']['first_name'],
       last_name: params['user']['last_name'],
@@ -10,7 +10,7 @@ class RegistrationsController < ApplicationController
     )  
 
     if user
-      session[:user_id] = user.user_id
+      session[:user_id] = user.id
       render json: {
         status: :created,
         user: user

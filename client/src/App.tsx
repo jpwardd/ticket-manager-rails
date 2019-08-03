@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './pages/dashboard/Dashboard';
 import Login from './pages/auth/Login';
+import Services from './pages/services/Services';
+import Register from './pages/auth/Register';
 
 
 const App: React.FC = (props) => {
@@ -10,8 +12,10 @@ const App: React.FC = (props) => {
 
       <Router>
         <Route exact path="/" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/services" component={Services} />
         </Switch>
       </Router>
  
