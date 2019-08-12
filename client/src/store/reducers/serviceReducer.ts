@@ -6,13 +6,15 @@ import { ServiceActions, ServiceActionTypes } from '../actions/ServiceActions'
 export interface IServiceState {
   loading: boolean
   services: Service[]
+  service: {} | Service
 
 
 }
 
 const initialServiceState: IServiceState = {
   services: [],
-  loading: false
+  loading: false,
+  service: {}
 }
 
 export const serviceReducer: Reducer<IServiceState, ServiceActions> = (state = initialServiceState, action) => {
@@ -24,6 +26,13 @@ export const serviceReducer: Reducer<IServiceState, ServiceActions> = (state = i
         loading: false,
         services: payload,
       };
+    }
+    case ServiceActionTypes.EDIT_SERVICE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        service: payload
+      }
     }
     default:
       return state;

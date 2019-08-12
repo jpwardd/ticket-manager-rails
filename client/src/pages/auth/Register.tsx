@@ -7,7 +7,7 @@ import { inputElement, formElement } from './Login';
 import { register } from '../../store/actions/AuthActions'
 import { AppState } from '../../store/store';
 import { ThunkDispatch } from 'redux-thunk';
-import { AuthActions } from '../../actions/AuthActions';
+import { AuthActions } from '../../store/actions/AuthActions';
 import { bindActionCreators } from 'redux';
 
 const Container = styled.div`
