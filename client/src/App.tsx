@@ -4,6 +4,8 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Login from './pages/auth/Login';
 import Services from './pages/services/Services';
 import Register from './pages/auth/Register';
+import NavBar from './components/NavBar/NavBar';
+import SideDrawer from './pages/SideDrawer';
 
 
 const App: React.FC = (props) => {
@@ -11,8 +13,11 @@ const App: React.FC = (props) => {
     <div className="App">
 
       <Router>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/register" component={Register} />
+        <div>
+          <NavBar />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </div>
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/services" component={Services} />

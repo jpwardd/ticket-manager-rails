@@ -10,7 +10,7 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import {
   authReducer,
   IAuthState,
-} from '../reducers/authReducer';
+} from './reducers/authReducer';
 import { serviceReducer, IServiceState } from './reducers/serviceReducer';
 
 const initialState = {}

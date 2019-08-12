@@ -17,6 +17,15 @@ class Api::V1::ServicesController < ApplicationController
     end
   end
 
+  def update
+    service = Service.find(params[:id])
+    service.user = @current_user
+    
+    if service.update(service_params)
+      render json: service
+    end
+  end
+
   private
 
   def service_params

@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { loginUser } from '../../actions/AuthActions'
+import { loginUser } from '../../store/actions/AuthActions'
 import { IAppState } from '../../store/store';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -17,7 +17,7 @@ const LoginContainer = styled.div`
   margin-top: 50px;
   height: 100%;
   border: 1px solid black;
-  margin: 70px 20px 20px 20px;
+  margin: 20px 20px 20px 20px;
   width: 40%;
   a {
     text-decoration: none;

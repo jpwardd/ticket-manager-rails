@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :services, only: [:create, :index, :update, :delete]
+      resources :clients, only: [:create, :index, :update, :delete, :show]
       resources :registrations, only: [:create]
     end
   end

@@ -1,12 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Services from '../services/Services';
+import styled from 'styled-components'
+import SideDrawer from '../SideDrawer';
+import { statement } from '@babel/template';
+import Clients from '../clients/Clients';
+
+const DashboardContainer = styled.div`
+  display: grid;
+  grid-template-columns: 200px 1fr;
+`
 
 
 const Dashboard: React.FC = (props) => {
+
+  const [dashboardState, setDashboardState] = useState({
+    services: false,
+    clients: false
+  })
+
+  const servicesToggle = () => {
+    setDashboardState({
+      ...dashboardState,
+      clients: false,
+      services: true
+    })
+  }
+
+  const openTicketsToggle = () => {
+    setDashboardState({
+      ...dashboardState,
+      services: false,
+      clients: true
+    })
+  }
+
+
     return (
-      <div>
-        <h2>dash</h2>
-      </div>
-    )
+      <DashboardContainer>
+    
+
+        <SideDrawer openTicketsToggle={openTicketsToggle} servicesToggle={servicesToggle} />
+    
+        <div>
+          {dashboardState.services && <Services />}
+          {dashboardState.clients && <Clients />}
+        </div>
+      </DashboardContainer>
+    );
 }
 
 export default Dashboard
