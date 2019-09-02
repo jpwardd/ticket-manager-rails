@@ -1,4 +1,4 @@
-import { Payload } from './AuthActions';
+import { Payload, loadUser } from './AuthActions';
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk'
 import axios from 'axios'
@@ -8,7 +8,8 @@ import { IServiceState } from '../reducers/serviceReducer';
 
 export enum ServiceActionTypes {
   GET_ALL_SERVICES  = 'GET_ALL_SERVICES',
-  EDIT_SERVICE_SUCCESS = 'EDIT_SERVICE_SUCCESS'
+  EDIT_SERVICE_SUCCESS = 'EDIT_SERVICE_SUCCESS',
+  CREATE_SERVICE = 'CREATE_SERVICE'
 }
 
 export interface IGetAllServicesAction {
@@ -21,7 +22,12 @@ export interface IEditServiceAction {
   Payload: Service
 }
 
-export type ServiceActions = IGetAllServicesAction & IEditServiceAction;
+export interface ICreateServiceAciton {
+  type: ServiceActionTypes.CREATE_SERVICE;
+  Payload: Service
+}
+
+export type ServiceActions = IGetAllServicesAction & IEditServiceAction & ICreateServiceAciton;
 
 
 export const getServices: ActionCreator<ThunkAction<Promise<any>, IServiceState, null, IGetAllServicesAction>
@@ -63,6 +69,29 @@ export const editService: ActionCreator<ThunkAction<Promise<any>, IServiceState,
       })
     } catch (err) {
       console.error(err)
+    }
+  }
+}
+
+export const createService: ActionCreator<ThunkAction<Promise<any>, IServiceState, null, ICreateServiceAciton>
+> = (name, price, category) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const response = await axios.post(`http://localhost:3001/api/v1/services`,
+        {
+          name: name,
+          price: price,
+          category: category
+        },
+        { withCredentials: true }
+      )
+
+      dispatch({
+        type: ServiceActionTypes.CREATE_SERVICE,
+        payload: response.data
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
 }

@@ -23,7 +23,6 @@ const App: React.FC = (props) => {
           <Route exact path="/services" component={Services} />
         </Switch>
       </Router>
- 
     </div>
   );
 }

@@ -10,43 +10,20 @@ const DashboardContainer = styled.div`
   grid-template-columns: 200px 1fr;
 `
 
-
 const Dashboard: React.FC = (props) => {
-
   const [dashboardState, setDashboardState] = useState({
     services: false,
     clients: false
   })
 
-  const servicesToggle = () => {
-    setDashboardState({
-      ...dashboardState,
-      clients: false,
-      services: true
-    })
-  }
-
-  const openTicketsToggle = () => {
-    setDashboardState({
-      ...dashboardState,
-      services: false,
-      clients: true
-    })
-  }
-
-
-    return (
-      <DashboardContainer>
-    
-
-        <SideDrawer openTicketsToggle={openTicketsToggle} servicesToggle={servicesToggle} />
-    
-        <div>
-          {dashboardState.services && <Services />}
-          {dashboardState.clients && <Clients />}
-        </div>
-      </DashboardContainer>
-    );
+  return (
+    <DashboardContainer>
+      <div>
+        {dashboardState.services && <Services />}
+        {dashboardState.clients && <Clients />}
+      </div>
+    </DashboardContainer>
+  );
 }
 
 export default Dashboard
