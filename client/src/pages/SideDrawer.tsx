@@ -41,12 +41,9 @@ const NavBarContainer = styled.div`
   color: #dc7f9b;
 }
 
-
-
 `
 
 type Props = ISidDrawerProps
-
 
 const SideDrawer: React.FC<Props> = (props) => {
   return(

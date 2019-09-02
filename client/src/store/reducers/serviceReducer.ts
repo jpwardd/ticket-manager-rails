@@ -18,7 +18,7 @@ const initialServiceState: IServiceState = {
 }
 
 export const serviceReducer: Reducer<IServiceState, ServiceActions> = (state = initialServiceState, action) => {
-    const { type, payload} = action;
+    const { type, payload } = action;
     switch (type) {
     case ServiceActionTypes.GET_ALL_SERVICES: {
       return {
@@ -29,6 +29,14 @@ export const serviceReducer: Reducer<IServiceState, ServiceActions> = (state = i
     }
     case ServiceActionTypes.EDIT_SERVICE_SUCCESS: {
       return {
+        ...state,
+        loading: false,
+        service: payload
+      }
+    }
+    case ServiceActionTypes.CREATE_SERVICE: {
+      console.log(action)
+      return { 
         ...state,
         loading: false,
         service: payload

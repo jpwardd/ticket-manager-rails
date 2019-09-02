@@ -1,0 +1,1 @@
+export const OPTIONS = ['Haircuts', 'Color', 'HighLights', 'Kids', 'Wax', 'Misc'];

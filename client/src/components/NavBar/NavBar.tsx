@@ -7,6 +7,7 @@ const NavBarContainer = styled.header`
   height: 56px;
   top: 0;
   left: 0;
+  position: relative;
   background: black;
 `
 
